@@ -3,4 +3,7 @@
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="title_main">首页</string>
+    <string name="title_take">拍摄</string>
+    <string name="title_me">我</string>
 </resources>
