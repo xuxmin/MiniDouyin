@@ -1,8 +1,6 @@
 package com.xxm.minidouyin.videoRecyclerView;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,20 +14,20 @@ import com.xxm.minidouyin.VideoActivity;
 import com.xxm.minidouyin.model.Video;
 import com.xxm.minidouyin.util.ImageHelper;
 
-public class VideoViewHolder extends RecyclerView.ViewHolder {
+public class VideoGridViewHolder extends RecyclerView.ViewHolder {
 
     public ImageView img;
 
-    public VideoViewHolder(@NonNull View itemView) {
+    public VideoGridViewHolder(@NonNull View itemView) {
         super(itemView);
         // layout 中的 view 实例化
-        img = itemView.findViewById(R.id.img);
+        img = itemView.findViewById(R.id.img_grid);
     }
 
-    public static VideoViewHolder create(Context context, ViewGroup root) {
+    public static VideoGridViewHolder create(Context context, ViewGroup root) {
         // 新建一个 layout
-        View v = LayoutInflater.from(context).inflate(R.layout.video_item_view, root, false);
-        return new VideoViewHolder(v);
+        View v = LayoutInflater.from(context).inflate(R.layout.video_grid_item_view, root, false);
+        return new VideoGridViewHolder(v);
     }
 
     public void bind(final Context context, final Video video) {

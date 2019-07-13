@@ -18,7 +18,9 @@ allprojects {
     repositories {
         google()
         jcenter()
-        
+
+        // 一个个人中心依赖库
+        maven { url 'https://jitpack.io' }
     }
 }
 

@@ -3,6 +3,7 @@ package com.xxm.minidouyin.model;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.Map;
 
 public class Video {
 
@@ -68,15 +69,15 @@ public class Video {
     }
 
     public static class PostVideoResponse {
-        @SerializedName("result") private List<String> result;
+        @SerializedName("result") private Map<String, String> result;
         @SerializedName("url") private String url;
         @SerializedName("success") private Boolean success;
 
-        public void setResult(List<String> result) {
+        public void setResult(Map<String, String> result) {
             this.result = result;
         }
 
-        public List<String> getResult(){
+        public Map<String, String> getResult(){
             return this.result;
         }
 
@@ -97,7 +98,7 @@ public class Video {
         }
 
         @Override public String toString() {
-            return "response{" +
+            return "response{" +"}" +
                     "result='"  + '\'' +
                     ", url='" + url + '\'' +
                     ", success=" + success.toString() +

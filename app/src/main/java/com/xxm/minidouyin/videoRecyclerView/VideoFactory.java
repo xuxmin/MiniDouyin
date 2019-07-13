@@ -4,6 +4,8 @@ import android.text.BoringLayout;
 import android.util.Log;
 import android.view.View;
 
+import androidx.constraintlayout.solver.LinearSystem;
+
 import com.xxm.minidouyin.api.IMiniDouyinService;
 import com.xxm.minidouyin.model.Video;
 
@@ -27,6 +29,19 @@ public class VideoFactory {
 
     public static List<Video> getAllVideos() {
         return mVideos;
+    }
+
+    public static List<Video> getAllVideos(String user) {
+
+        List<Video> videos = new ArrayList<>();
+
+        for (int i = 0; i<mVideos.size(); i++) {
+            if (mVideos.get(i).getUserName().equals(user)) {
+                videos.add(mVideos.get(i));
+            }
+        }
+
+        return videos;
     }
 
     // public static Boolean isSuccess = false;
