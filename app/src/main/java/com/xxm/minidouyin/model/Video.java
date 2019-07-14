@@ -11,6 +11,7 @@ public class Video {
     @SerializedName("user_name") private String userName;
     @SerializedName("image_url") private String imageUrl;
     @SerializedName("video_url") private String videoUrl;
+    @SerializedName("createdAt") private String createdAt;
 
     public String getStudentId() {
         return studentId;
@@ -42,6 +43,14 @@ public class Video {
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
+    }
+
+    public String getCreatedAt() {
+        return this.createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public static class GetVideoResponse {

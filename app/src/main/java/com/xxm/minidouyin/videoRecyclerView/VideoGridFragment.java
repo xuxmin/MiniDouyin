@@ -75,7 +75,11 @@ public class VideoGridFragment extends Fragment {
 
     private void initData(final String user) {
 
-        Log.d(TAG, user);
+        if (user == null) {
+            Log.d(TAG, "user == null");
+        } else {
+            Log.d(TAG, user);
+        }
 
         new Thread() {
             @Override

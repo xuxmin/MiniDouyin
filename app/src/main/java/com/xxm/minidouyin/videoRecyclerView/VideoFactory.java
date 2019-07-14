@@ -3,6 +3,7 @@ package com.xxm.minidouyin.videoRecyclerView;
 import android.text.BoringLayout;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.constraintlayout.solver.LinearSystem;
 
@@ -35,10 +36,14 @@ public class VideoFactory {
 
         List<Video> videos = new ArrayList<>();
 
-        for (int i = 0; i<mVideos.size(); i++) {
-            if (mVideos.get(i).getUserName().equals(user)) {
-                videos.add(mVideos.get(i));
+        try {
+            for (int i = 0; i<mVideos.size(); i++) {
+                if (mVideos.get(i).getUserName().equals(user)) {
+                    videos.add(mVideos.get(i));
+                }
             }
+        } catch (Exception e) {
+            Log.d(TAG, "IndexOutOfBoundsException");
         }
 
         return videos;

@@ -27,7 +27,7 @@
                 app:autoTint="true"
                 app:layout_collapseMode="parallax"
                 app:tideHeight="50dp"
-                app:tintColor="#01579B"></com.intrusoft.library.FrissonView>
+                app:tintColor="#01579B"/>
 
             <ImageView
                 android:layout_width="80dp"
@@ -37,14 +37,16 @@
                 android:src="@drawable/unlogin" />
 
             <TextView
+                android:id="@+id/tv_login"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="150dp"
+                android:layout_marginTop="146dp"
                 android:gravity="center"
-                android:text="张三"
+                android:text="点我登陆"
+                android:clickable="true"
                 android:textColor="@android:color/white"
-                android:textSize="24dp"
+                android:textSize="22sp"
                 app:layout_collapseMode="pin" />
 
 
@@ -138,6 +140,8 @@
             </LinearLayout>
 
             <Button
+                android:visibility="invisible"
+                android:enabled="false"
                 android:id="@+id/bt_uploadVideo"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
@@ -163,5 +167,5 @@
             android:layout_height="1000dp"/>
 
     </com.google.android.material.appbar.AppBarLayout>
-    
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

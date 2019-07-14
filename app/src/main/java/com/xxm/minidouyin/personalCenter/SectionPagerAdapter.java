@@ -26,7 +26,7 @@ public class SectionPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int i) {
 
-        if (i == 1) {
+        if (i == 0) {
             return VideoGridFragment.newInstance(user_name);
         }
         else {

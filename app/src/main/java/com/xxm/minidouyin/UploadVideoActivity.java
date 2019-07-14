@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.xxm.minidouyin.api.IMiniDouyinService;
@@ -38,6 +39,7 @@ public class UploadVideoActivity extends AppCompatActivity {
     private static final int PICK_IMAGE = 1;
     private static final int PICK_VIDEO = 2;
 
+    private Toolbar mToolbar;
     private ImageButton mBackButton;
     private Button mAddCoverButton, mAddVideoButton, mUploadButton;
     private ImageView mCoverImageView, mVideoImageView;
@@ -67,18 +69,27 @@ public class UploadVideoActivity extends AppCompatActivity {
 
     }
     private void initBtns() {
-        mBackButton = findViewById(R.id.ibt_back);
+        mToolbar = findViewById(R.id.tb_post);
         mAddCoverButton = findViewById(R.id.bt_addCover);
         mAddVideoButton = findViewById(R.id.bt_addVideo);
         mUploadButton = findViewById(R.id.bt_upload);
 
-        // go back
-        mBackButton.setOnClickListener(new View.OnClickListener() {
+        mToolbar = findViewById(R.id.tb_post);
+
+        setSupportActionBar(mToolbar);
+
+        // goback
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
+        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                // finish();
+            public void onClick(View v) {
+                finish();
             }
         });
+
+
 
         // add Cover
         mAddCoverButton.setOnClickListener(new View.OnClickListener() {
