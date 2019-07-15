@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.xxm.minidouyin.R;
 
-public class UserInfoActivity extends AppCompatActivity {
+public class PersonalInfoActivity extends AppCompatActivity {
 
     private EditText mUsernameEditText, mIdEditText, mNickEditText;
     private Toolbar mToolbar;

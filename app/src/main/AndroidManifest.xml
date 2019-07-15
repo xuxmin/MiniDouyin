@@ -26,7 +26,7 @@
         </activity>
         <activity android:name=".VideoActivity" />
         <activity android:name=".UploadVideoActivity" />
-        <activity android:name=".personalCenter.UserInfoActivity"/>
+        <activity android:name=".personalCenter.PersonalInfoActivity"/>
     </application>
 
 </manifest>
