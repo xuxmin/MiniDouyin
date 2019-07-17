@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.xxm.minidouyin.R;
 import com.xxm.minidouyin.VideoActivity;
@@ -62,12 +63,15 @@ public class VideoListFragment extends Fragment {
 
     private void initRecyclerView() {
         mRecycleView = (RecyclerView)view.findViewById(R.id.rc_videolist);
+
+        mRecycleView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
+
         // 创建 Adapter, 传入数据和上下文
         mAdapter = new VideoListAdapter(getActivity(), getActivity().getSupportFragmentManager());
         // 给 RecyclerView 设置 Adapter
         mRecycleView.setAdapter(mAdapter);
         // 设置 layoutManager
-        mRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        // mRecycleView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         mAdapter.notifyDataSetChanged();
     }
@@ -89,7 +93,7 @@ public class VideoListFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(),"刷新成功",Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(getActivity(),"刷新成功",Toast.LENGTH_SHORT).show();
                             mAdapter.notifyDataSetChanged();
                         }
                     });

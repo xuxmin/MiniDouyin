@@ -1,6 +1,8 @@
 package com.xxm.minidouyin;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -49,8 +51,7 @@ public class UploadVideoActivity extends AppCompatActivity {
     private Retrofit retrofit;
     private IMiniDouyinService miniDouyinService;
 
-    private String studentId;
-    private String username;
+    private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,13 +61,9 @@ public class UploadVideoActivity extends AppCompatActivity {
         mCoverImageView = findViewById(R.id.img_cover);
         mVideoImageView = findViewById(R.id.img_video);
 
-        studentId = "317xxxxxxx";
-        username = "xxx";
-
         initBtns();
 
         clearState();
-
     }
     private void initBtns() {
         mToolbar = findViewById(R.id.tb_post);
@@ -182,7 +179,7 @@ public class UploadVideoActivity extends AppCompatActivity {
             protected Boolean doInBackground(Object... objects) {
                 try {
                     Response<Video.PostVideoResponse> response = getVideoService()
-                            .postVideo(studentId, username, coverImagePart, videoPart)
+                            .postVideo(getStrudentId(), getNickname(), coverImagePart, videoPart)
                             .execute();
                     Log.d(TAG, response.body().toString());
 
@@ -210,39 +207,8 @@ public class UploadVideoActivity extends AppCompatActivity {
                 }
             }
 
-            @Override
-            protected void onPreExecute() {
-                super.onPreExecute();
-                mProgressBar.setProgress(0);
-            }
-
-
         }.execute();
 
-//        Call<Video.PostVideoResponse> call = getVideoService()
-//                .postVideo(studentId, username, coverImagePart, videoPart);
-//        call.enqueue(new Callback<Video.PostVideoResponse>() {
-//            @Override
-//            public void onResponse(Call<Video.PostVideoResponse> call, Response<Video.PostVideoResponse> response) {
-//                Log.d(TAG, String.valueOf(response.isSuccessful()));
-//                Log.d(TAG, String.valueOf(response.body().toString()));
-//
-//                if (response.isSuccessful() && response.body() != null) {
-//                    clearState();
-//                    Log.d(TAG, "上传成功??");
-//                    Toast.makeText(getApplicationContext(), "上传成功", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Video.PostVideoResponse> call, Throwable throwable) {
-//                Log.d(TAG, "上传失败??");
-//
-//                mUploadButton.setText("Upload");
-//                mUploadButton.setEnabled(true);
-//                Toast.makeText(getApplicationContext(), "上传失败", Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
     }
     private MultipartBody.Part getMultipartFromUri(String name, Uri uri) {
@@ -272,5 +238,23 @@ public class UploadVideoActivity extends AppCompatActivity {
         mVideoImageView.setWillNotDraw(true);
         mSelectedImage = null;
         mSelectedVideo = null;
+    }
+
+
+    private String getNickname() {
+        return getSharedPreferences().getString("nickname", null);
+    }
+
+    private String getStrudentId() {
+        return getSharedPreferences().getString("user_id", null);
+    }
+
+    private SharedPreferences getSharedPreferences() {
+        if (this.sharedPreferences == null) {
+            this.sharedPreferences= getSharedPreferences("user", Context.MODE_PRIVATE);
+            return this.sharedPreferences;
+        } else {
+            return this.sharedPreferences;
+        }
     }
 }

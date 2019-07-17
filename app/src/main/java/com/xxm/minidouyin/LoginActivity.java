@@ -1,5 +1,6 @@
 package com.xxm.minidouyin;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -59,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         mLoginButton = findViewById(R.id.login);
         mLoginButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 Log.d(TAG, "button click");
                 if (isValidPassword() && isValidUsername()) {
                     final String username = mUsernmae.getText().toString();
@@ -76,20 +77,38 @@ public class LoginActivity extends AppCompatActivity {
                                                 .execute();
                                 Log.d(TAG, response.body().toString());
                                 Boolean isSuccess = response.body().getIsSuccess();
-                                User user = response.body().getUser();
 
-                                Log.d(TAG, user.toString());
-                                // 存储登录的信息
-                                SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString("username", user.getUserName());
-                                editor.putString("password", user.getPassword());
-                                // 默认的 user_id 与 nickname
-                                editor.putString("user_id", "**********");
-                                editor.putString("nickname", user.getUserName());
-                                editor.apply();
 
-                                finish();
+                                if (isSuccess) {
+                                    User user = response.body().getUser();
+                                    Log.d(TAG, user.toString());
+                                    // 存储登录的信息
+                                    SharedPreferences sharedPreferences = getSharedPreferences("user", Context.MODE_PRIVATE);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putString("username", user.getUserName());
+                                    editor.putString("password", user.getPassword());
+                                    // 默认的 user_id 与 nickname
+                                    editor.putString("user_id", "**********");
+                                    editor.putString("nickname", user.getUserName());
+                                    editor.apply();
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(), "登录成功", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                    setResult(Activity.RESULT_OK);
+                                    finish();
+                                } else {
+                                    runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            Toast.makeText(getApplicationContext(), "登录失败", Toast.LENGTH_SHORT).show();
+                                        }
+                                    });
+                                }
+
+
                             } catch (Exception e) {
                                 Log.d(TAG, e.getMessage());
                             }

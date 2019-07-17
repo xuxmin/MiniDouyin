@@ -1,5 +1,6 @@
 package com.xxm.minidouyin.personalCenter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,6 +23,9 @@ import com.xxm.minidouyin.R;
 import com.xxm.minidouyin.UploadVideoActivity;
 
 public class PersonalCenterFragment extends Fragment {
+
+    private static final int REQUEST_CODE_LOGOUT = 1002;
+    private static final int REQUEST_CODE_LOGIN= 1001;
 
     private Button mUploadButton;
     private static final String KEY_EXTRA_USER = "extra_user";
@@ -62,7 +66,6 @@ public class PersonalCenterFragment extends Fragment {
         // 设置适配器
         mPager.setAdapter(mSectionPagerAdapter);
         mTabLayout.setupWithViewPager(mPager);
-
     }
 
     private void refreshData() {
@@ -77,7 +80,7 @@ public class PersonalCenterFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getActivity(), PersonalInfoActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, REQUEST_CODE_LOGOUT);
                 }
             });
         } else {
@@ -87,7 +90,7 @@ public class PersonalCenterFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getActivity(), LoginActivity.class);
-                    startActivity(intent);
+                    startActivityForResult(intent, REQUEST_CODE_LOGIN);
                 }
             });
         }
@@ -129,33 +132,7 @@ public class PersonalCenterFragment extends Fragment {
         initBtn();
         initViewPager();
         refreshData();
-//        Log.d(TAG, "onResume");
-//        // 保证登录成功后，返回到个人主页，能够立刻看到修改
-//        if (this.LoginUser != null  && this.LoginUser.equals(this.user)) {     // 在个人中心
-//            // 获取当前登录的用户名
-//            SharedPreferences sharedPreferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-//            this.LoginUser = sharedPreferences.getString("username", null);//(key,若无数据需要赋的值)
-//            // 退出登录
-//            if (this.LoginUser == null) {
-//                this.user = null;
-//                refreshData(null);
-//            } else {
-//                refreshData(this.user);
-//            }
-//        } else if (this.LoginUser == null && this.user == null) {
-//            // 在个人中心，未登录
-//            // 获取当前登录的用户名
-//            SharedPreferences sharedPreferences = getContext().getSharedPreferences("user", Context.MODE_PRIVATE);
-//            this.LoginUser = sharedPreferences.getString("username", null);//(key,若无数据需要赋的值)
-//            if (this.LoginUser != null) {
-//                // 登录
-//                this.user = this.LoginUser;
-//                refreshData(this.LoginUser);
-//            }
-//        }
-
     }
-
 
     private String getLoginUser() {
         // 获取当前登录的用户名

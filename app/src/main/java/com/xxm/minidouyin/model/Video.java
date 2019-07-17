@@ -49,6 +49,16 @@ public class Video {
         return this.createdAt;
     }
 
+    public String getFormatCreateAt() {
+        String tmp = this.createdAt;
+        String date = tmp.split("T")[0].substring(5);
+        if (date.substring(0,1).equals("0")) {
+            date = date.substring(1);
+        }
+        String time = tmp.split("T")[1].substring(0,5);
+        return date + " " + time;
+    }
+
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }

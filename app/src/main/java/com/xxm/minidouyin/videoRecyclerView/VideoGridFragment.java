@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -70,6 +71,10 @@ public class VideoGridFragment extends Fragment {
         // 设置 GridLayoutManager
         mRecycleView.setLayoutManager(new GridLayoutManager(getContext(),3));
 
+        //
+        mRecycleView.addItemDecoration(
+                new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
+
         mAdapter.notifyDataSetChanged();
     }
 
@@ -98,7 +103,7 @@ public class VideoGridFragment extends Fragment {
                     getActivity().runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(getActivity(),"刷新成功",Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(getActivity(),"刷新成功",Toast.LENGTH_SHORT).show();
                             mAdapter.notifyDataSetChanged();
                         }
                     });

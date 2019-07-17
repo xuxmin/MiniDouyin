@@ -1,5 +1,6 @@
 package com.xxm.minidouyin.personalCenter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -26,7 +27,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_userinfo);
+        setContentView(R.layout.activity_myinfo);
 
         initToolBar();
         initTv();
@@ -108,6 +109,7 @@ public class PersonalInfoActivity extends AppCompatActivity {
                 editor.remove("password");
                 editor.remove("user_id");
                 editor.apply();
+                setResult(Activity.RESULT_OK);
                 finish();
             }
         });

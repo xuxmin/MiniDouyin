@@ -2,6 +2,7 @@ package com.xxm.minidouyin.videoRecyclerView;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.xxm.minidouyin.R;
 import com.xxm.minidouyin.VideoActivity;
 import com.xxm.minidouyin.model.Video;
 import com.xxm.minidouyin.personalCenter.PersonalCenterFragment;
+import com.xxm.minidouyin.personalCenter.UserInfoActivity;
 import com.xxm.minidouyin.util.ImageHelper;
 
 public class VideoListViewHolder extends RecyclerView.ViewHolder {
@@ -43,7 +45,7 @@ public class VideoListViewHolder extends RecyclerView.ViewHolder {
 
         final String user_name = video.getUserName();
         mAuthorTextView.setText(user_name);
-        mDateTextView.setText(video.getCreatedAt());
+        mDateTextView.setText(video.getFormatCreateAt());
 
 
         img.setOnClickListener(new View.OnClickListener() {
@@ -59,11 +61,14 @@ public class VideoListViewHolder extends RecyclerView.ViewHolder {
             @Override
             public void onClick(View view) {
 
-                fragmentManager
-                        .beginTransaction()
-                        .addToBackStack(null)
-                        .replace(R.id.contextFrameLayout, PersonalCenterFragment.newInstance(user_name))
-                        .commit();
+                Intent intent = new Intent(context, UserInfoActivity.class);
+                intent.putExtra(UserInfoActivity.KEY_EXTRA_USER, user_name);
+                context.startActivity(intent);
+//                fragmentManager
+//                        .beginTransaction()
+//                        .addToBackStack(null)
+//                        .replace(R.id.contextFrameLayout, PersonalCenterFragment.newInstance(user_name))
+//                        .commit();
             }
         });
     }
