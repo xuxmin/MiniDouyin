@@ -5,16 +5,26 @@ android {
     buildToolsVersion "29.0.0"
     defaultConfig {
         applicationId "com.xxm.minidouyin"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        multiDexEnabled true
+        ndk {
+            abiFilters "armeabi-v7a", "x86", "armeabi"
+        }
     }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['src/main/jniLibs']          // 终于这样子可以了。。。。。
         }
     }
 }
@@ -38,5 +48,11 @@ dependencies {
     implementation 'com.github.IntruderShanky:Frisson:2.0.0'
     // ijk player
     implementation 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
-    implementation 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
+
+    // 双击点赞特效 https://github.com/KevinYou128/HotHeart/tree/master
+    // implementation 'com.github.KevinYou128:HotHeart:v1.2'
+
+    // lottie
+    implementation 'com.airbnb.android:lottie:2.7.0'
+
 }

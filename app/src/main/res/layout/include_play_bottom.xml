@@ -29,47 +29,20 @@
     <SeekBar
         android:id="@+id/seekBar"
         android:layout_toRightOf="@+id/tv_time"
-        android:layout_toLeftOf="@+id/btn_setting"
+        android:layout_marginRight="32dp"
+        android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-    <ImageButton
-        android:id="@+id/btn_setting"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="30dp"
-        android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/btn_vol"
-        android:layout_toLeftOf="@+id/btn_vol"
-        android:layout_toRightOf="@+id/btn_vol"
-        android:src="@drawable/portrait"
-        android:text="@string/smallScreen" />
-
-
-    <ImageButton
-        android:id="@+id/btn_vol"
-        style="?android:attr/borderlessButtonStyle"
-        android:src="@drawable/volumn"
-        android:layout_alignParentRight="true"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="16dp"
-        android:layout_width="20dp"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"/>
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_vol"
-        android:layout_marginBottom="-2dp"
-        android:text="Button" />
-
-    <!--<Button-->
+    <!--<ImageButton-->
+        <!--android:id="@+id/btn_setting"-->
         <!--style="?android:attr/borderlessButtonStyle"-->
-        <!--android:id="@+id/btn_stop"-->
-        <!--android:layout_centerVertical="true"-->
+        <!--android:layout_width="30dp"-->
+        <!--android:layout_marginRight="12dp"-->
+        <!--android:layout_height="wrap_content"-->
         <!--android:layout_alignParentRight="true"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content" />-->
+        <!--android:src="@drawable/portrait"/>-->
+
+
 </RelativeLayout>

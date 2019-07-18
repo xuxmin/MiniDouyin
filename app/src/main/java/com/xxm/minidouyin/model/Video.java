@@ -56,7 +56,9 @@ public class Video {
             date = date.substring(1);
         }
         String time = tmp.split("T")[1].substring(0,5);
-        return date + " " + time;
+        String hour = time.substring(3,5);
+        String minute = time.substring(0,2);
+        return date + " " + hour + ":" + minute;
     }
 
     public void setCreatedAt(String createdAt) {

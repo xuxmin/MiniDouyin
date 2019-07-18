@@ -3,10 +3,12 @@ package com.xxm.minidouyin.IJKPlayer;
 import android.content.Context;
 import android.content.res.AssetFileDescriptor;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.RelativeLayout;
 
 import java.io.IOException;
 
@@ -86,6 +88,7 @@ public class VideoPlayerIJK extends FrameLayout {
         surfaceView.getHolder().addCallback(new PlayerSurfaceCallback());
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
                 , ViewGroup.LayoutParams.MATCH_PARENT);
+
         surfaceView.setLayoutParams(layoutParams);
         this.addView(surfaceView);
         hasCreateSurfaceView = true;

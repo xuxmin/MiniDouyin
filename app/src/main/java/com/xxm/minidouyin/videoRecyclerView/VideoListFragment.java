@@ -1,27 +1,20 @@
 package com.xxm.minidouyin.videoRecyclerView;
 
-import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.xxm.minidouyin.R;
-import com.xxm.minidouyin.VideoActivity;
 import com.xxm.minidouyin.model.Video;
-import com.xxm.minidouyin.personalCenter.PersonalCenterFragment;
 
 import java.util.List;
 
@@ -29,6 +22,7 @@ public class VideoListFragment extends Fragment {
 
     private RecyclerView mRecycleView;
     private VideoListAdapter mAdapter;
+    private SwipeRefreshLayout swipeRefreshLayout;
     private View view;
     // private List<Video> mVideos = new ArrayList<>();
     private final String TAG = "VideoListFragment";
@@ -44,12 +38,14 @@ public class VideoListFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_video_list, container, false);
 
-        Log.d(TAG, "onCreateView");
         // 设置 RecyclerView
         initRecyclerView();
 
         // 初始化 数据
         initData();
+
+        initSwipeRefresh();
+
 
         return view;
     }
@@ -104,5 +100,17 @@ public class VideoListFragment extends Fragment {
             }
         }.start();
 
+    }
+
+    private void initSwipeRefresh() {
+        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                VideoFactory.refresh();
+                mAdapter.notifyDataSetChanged();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
     }
 }

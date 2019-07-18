@@ -1,5 +1,6 @@
 package com.xxm.minidouyin.personalCenter;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -21,6 +22,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.xxm.minidouyin.LoginActivity;
 import com.xxm.minidouyin.R;
 import com.xxm.minidouyin.UploadVideoActivity;
+import com.xxm.minidouyin.util.Permission;
 
 public class PersonalCenterFragment extends Fragment {
 
@@ -34,6 +36,11 @@ public class PersonalCenterFragment extends Fragment {
     private View view;
     private SharedPreferences sharedPreferences;
 
+    private static int REQUEST_CODE_STORAGE_PERMISSION = 1001;
+
+    String[] permissions = new String[] {
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+    };
 
     @Nullable
     @Override
@@ -116,10 +123,16 @@ public class PersonalCenterFragment extends Fragment {
             mUploadButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(getActivity(), UploadVideoActivity.class);
-                    startActivity(intent);
+                    // 拥有权限才能上传图片
+                    if (Permission.isPermissionsReady(getActivity(), permissions)) {
+                         Intent intent = new Intent(getActivity(), UploadVideoActivity.class);
+                         startActivity(intent);
+                    } else {
+                         Permission.reuqestPermissions(getActivity(), permissions, REQUEST_CODE_STORAGE_PERMISSION);
+                    }
                 }
             });
+
         } else {
             mUploadButton.setVisibility(View.INVISIBLE);
             mUploadButton.setEnabled(false);

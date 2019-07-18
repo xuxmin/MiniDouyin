@@ -1,5 +1,6 @@
 package com.xxm.minidouyin;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -22,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.xxm.minidouyin.api.IMiniDouyinService;
 import com.xxm.minidouyin.model.Video;
 import com.xxm.minidouyin.util.ImageHelper;
+import com.xxm.minidouyin.util.Permission;
 import com.xxm.minidouyin.util.ResourceUtils;
 
 import java.io.File;
@@ -52,6 +54,8 @@ public class UploadVideoActivity extends AppCompatActivity {
     private IMiniDouyinService miniDouyinService;
 
     private SharedPreferences sharedPreferences;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

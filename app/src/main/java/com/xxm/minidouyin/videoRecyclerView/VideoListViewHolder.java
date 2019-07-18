@@ -1,6 +1,5 @@
 package com.xxm.minidouyin.videoRecyclerView;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,10 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.xxm.minidouyin.IJKPlayerActivity;
 import com.xxm.minidouyin.R;
-import com.xxm.minidouyin.VideoActivity;
 import com.xxm.minidouyin.model.Video;
-import com.xxm.minidouyin.personalCenter.PersonalCenterFragment;
 import com.xxm.minidouyin.personalCenter.UserInfoActivity;
 import com.xxm.minidouyin.util.ImageHelper;
 
@@ -53,7 +51,7 @@ public class VideoListViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 // Intent intent = new Intent(context, VideoActivity.class);
                 // context.startActivity(intent);
-                VideoActivity.launch(context, video.getVideoUrl());
+                IJKPlayerActivity.launch(context, video.getVideoUrl());
             }
         });
 
