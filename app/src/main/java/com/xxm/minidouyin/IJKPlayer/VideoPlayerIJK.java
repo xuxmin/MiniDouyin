@@ -6,9 +6,11 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.TextureView;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.io.IOException;
 
@@ -21,7 +23,7 @@ public class VideoPlayerIJK extends FrameLayout {
      */
     public IMediaPlayer mMediaPlayer = null;
 
-    private boolean hasCreateSurfaceView = false;
+     private boolean hasCreateSurfaceView = false;
     /**
      * 视频文件地址
      */
@@ -158,7 +160,8 @@ public class VideoPlayerIJK extends FrameLayout {
         IjkMediaPlayer ijkMediaPlayer = new IjkMediaPlayer();
 
         //开启硬解码
-        ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
+        // ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
+        ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 1);
 
         mMediaPlayer = ijkMediaPlayer;
         ((IjkMediaPlayer) mMediaPlayer).setSpeed(1f);

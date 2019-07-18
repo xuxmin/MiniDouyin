@@ -6,35 +6,32 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.airbnb.lottie.LottieAnimationView;
+import com.xxm.minidouyin.IJKPlayer.IjkplayerVideoView_TextureView;
 import com.xxm.minidouyin.IJKPlayer.VideoPlayerIJK;
 import com.xxm.minidouyin.IJKPlayer.VideoPlayerListener;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
-public class IJKPlayerActivity extends Activity {
-    VideoPlayerIJK ijkPlayer = null;
+
+public class IjkPlayerTextureViewActivity extends Activity {
+    IjkplayerVideoView_TextureView ijkPlayer = null;
     ImageButton btnSetting;
     ImageButton btnPlay;
     SeekBar seekBar;
@@ -78,7 +75,7 @@ public class IJKPlayerActivity extends Activity {
     }
 
     public static void launch(Context context, String url) {
-        Intent intent = new Intent(context, IJKPlayerActivity.class);
+        Intent intent = new Intent(context, IjkPlayerTextureViewActivity.class);
         intent.putExtra("url", url);
         context.startActivity(intent);
     }
@@ -110,7 +107,7 @@ public class IJKPlayerActivity extends Activity {
 
         rl_bottom = findViewById(R.id.include_play_bottom);
         rl_bottom.setVisibility(View.GONE);
-        VideoPlayerIJK ijkPlayerView = findViewById(R.id.ijkPlayer);
+        IjkplayerVideoView_TextureView ijkPlayerView = findViewById(R.id.ijkPlayer);
 
         tvTime = findViewById(R.id.tv_time);
         tvLoadMsg = findViewById(R.id.tv_load_msg);
@@ -283,8 +280,12 @@ public class IJKPlayerActivity extends Activity {
                 refresh();
                 handler.sendEmptyMessageDelayed(MSG_REFRESH, 50);
                 isPlayFinish = false;
+
+
                 mVideoWidth = mp.getVideoWidth();
                 mVideoHeight = mp.getVideoHeight();
+
+                Log.d(TAG, "VideoHeight:" + mVideoHeight + " VideoWidth: " + mVideoWidth);
                 videoScreenInit();
                 mp.start();
                 rlLoading.setVisibility(View.GONE);
@@ -301,6 +302,7 @@ public class IJKPlayerActivity extends Activity {
                 mVideoHeight = mp.getVideoHeight();
             }
         });
+
     }
 
 
@@ -426,16 +428,27 @@ public class IJKPlayerActivity extends Activity {
     private void portrait() {
         ijkPlayer.pause();
         isPortrait = true;
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        // setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         WindowManager wm = (WindowManager) this
                 .getSystemService(Context.WINDOW_SERVICE);
+
         float width = wm.getDefaultDisplay().getWidth();
         float height = wm.getDefaultDisplay().getHeight();
+
+        Log.d(TAG, "width:" + width + " height:" + height);
+
         float ratio = width / height;
         if (width < height) {
             ratio = height / width;
         }
+
+        // TODO 视频旋转的问题
+        // mVideoWidth = mVideoHeight;
+
+        Log.d("IjkPlayerTextureView", String.valueOf(mVideoHeight));
+        Log.d("IjkPlayerTextureView", String.valueOf(mVideoWidth));
+
 
         RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) rlPlayer.getLayoutParams();
         layoutParams.height = (int) (mVideoHeight * ratio);

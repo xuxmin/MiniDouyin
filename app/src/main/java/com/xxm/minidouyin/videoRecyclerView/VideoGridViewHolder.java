@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.xxm.minidouyin.IJKPlayerActivity;
+import com.xxm.minidouyin.IjkPlayerTextureViewActivity;
 import com.xxm.minidouyin.R;
 import com.xxm.minidouyin.model.Video;
 import com.xxm.minidouyin.util.ImageHelper;
@@ -37,7 +37,9 @@ public class VideoGridViewHolder extends RecyclerView.ViewHolder {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IJKPlayerActivity.launch(context, video.getVideoUrl());
+//                IJKPlayerActivity.launch(context, video.getVideoUrl());
+                IjkPlayerTextureViewActivity.launch(context, video.getVideoUrl());
+
             }
         });
     }

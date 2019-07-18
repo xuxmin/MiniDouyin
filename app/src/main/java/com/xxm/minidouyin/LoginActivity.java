@@ -103,7 +103,7 @@ public class LoginActivity extends AppCompatActivity {
                                     runOnUiThread(new Runnable() {
                                         @Override
                                         public void run() {
-                                            Toast.makeText(getApplicationContext(), "登录失败", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getApplicationContext(), "登录失败, 用户名和密码均为 test11", Toast.LENGTH_SHORT).show();
                                         }
                                     });
                                 }

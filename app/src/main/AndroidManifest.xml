@@ -36,6 +36,7 @@
         <activity android:name=".personalCenter.UserInfoActivity"/>
         <activity android:name=".IJKPlayerActivity"/>
         <activity android:name=".RecordVideoActivity"/>
+        <activity android:name=".IjkPlayerTextureViewActivity"/>
     </application>
 
 </manifest>

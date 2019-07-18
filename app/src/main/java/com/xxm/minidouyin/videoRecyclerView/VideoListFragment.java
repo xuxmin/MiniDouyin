@@ -1,5 +1,6 @@
 package com.xxm.minidouyin.videoRecyclerView;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.xxm.minidouyin.R;
 import com.xxm.minidouyin.model.Video;
+import com.xxm.minidouyin.util.Setting;
 
 import java.util.List;
 
@@ -34,6 +36,9 @@ public class VideoListFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        // 设置状态栏颜色
+        Setting.setStatusBarColor(Color.BLACK, getActivity());
 
 
         view = inflater.inflate(R.layout.fragment_video_list, container, false);

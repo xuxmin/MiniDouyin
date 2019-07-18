@@ -8,10 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.xxm.minidouyin.IJKPlayer.VideoPlayerIJK
+        <!--<com.xxm.minidouyin.IJKPlayer.VideoPlayerIJK-->
+            <!--android:id="@+id/ijkPlayer"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent" />-->
+
+        <com.xxm.minidouyin.IJKPlayer.IjkplayerVideoView_TextureView
             android:id="@+id/ijkPlayer"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"/>
 
         <TextView
             android:id="@+id/tv_play_end"

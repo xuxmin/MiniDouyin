@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.xxm.minidouyin.IJKPlayerActivity;
+import com.xxm.minidouyin.IjkPlayerTextureViewActivity;
 import com.xxm.minidouyin.R;
 import com.xxm.minidouyin.model.Video;
 import com.xxm.minidouyin.personalCenter.UserInfoActivity;
@@ -51,7 +51,8 @@ public class VideoListViewHolder extends RecyclerView.ViewHolder {
             public void onClick(View v) {
                 // Intent intent = new Intent(context, VideoActivity.class);
                 // context.startActivity(intent);
-                IJKPlayerActivity.launch(context, video.getVideoUrl());
+//                IJKPlayerActivity.launch(context, video.getVideoUrl());
+                IjkPlayerTextureViewActivity.launch(context, video.getVideoUrl());
             }
         });
 
