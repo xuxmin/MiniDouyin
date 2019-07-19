@@ -12,6 +12,10 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.AttrRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.io.IOException;
 
 import tv.danmaku.ijk.media.player.IMediaPlayer;
@@ -19,11 +23,11 @@ import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
 public class VideoPlayerIJK extends FrameLayout {
     /**
-     * 由 ijkplayer提供，用于播放视频，需要给他传入一个surfaceView
+     * 由ijkplayer提供，用于播放视频，需要给他传入一个surfaceView
      */
     public IMediaPlayer mMediaPlayer = null;
 
-     private boolean hasCreateSurfaceView = false;
+    private boolean hasCreateSurfaceView = false;
     /**
      * 视频文件地址
      */
@@ -35,23 +39,18 @@ public class VideoPlayerIJK extends FrameLayout {
     private VideoPlayerListener listener;
     private Context mContext;
 
-    public VideoPlayerIJK(Context context) {
+    public VideoPlayerIJK(@NonNull Context context) {
         super(context);
         initVideoView(context);
     }
 
-    public VideoPlayerIJK(Context context, AttributeSet attrs) {
+    public VideoPlayerIJK(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         initVideoView(context);
     }
 
-    public VideoPlayerIJK(Context context, AttributeSet attrs, int defStyleAttr) {
+    public VideoPlayerIJK(@NonNull Context context, @Nullable AttributeSet attrs, @AttrRes int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initVideoView(context);
-    }
-
-    public VideoPlayerIJK(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
         initVideoView(context);
     }
 
@@ -90,7 +89,6 @@ public class VideoPlayerIJK extends FrameLayout {
         surfaceView.getHolder().addCallback(new PlayerSurfaceCallback());
         ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT
                 , ViewGroup.LayoutParams.MATCH_PARENT);
-
         surfaceView.setLayoutParams(layoutParams);
         this.addView(surfaceView);
         hasCreateSurfaceView = true;
@@ -160,11 +158,30 @@ public class VideoPlayerIJK extends FrameLayout {
         IjkMediaPlayer ijkMediaPlayer = new IjkMediaPlayer();
 
         //开启硬解码
-        // ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
+        // https://github.com/Bilibili/ijkplayer/issues/1944
+        ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec", 1);
         ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-auto-rotate", 1);
+        ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "mediacodec-handle-resolution-change", 1);
+        //  关闭播放器缓冲，这个必须关闭，否则会出现播放一段时间后，一直卡主，控制台打印 FFP_MSG_BUFFERING_START
+        //ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "packet-buffering", 0L);
+
+        //ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "max-buffer-size", 4000 * 1024);
+        //ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_PLAYER, "min-frames", 100);
+
+        //ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT, "buffer_size", 4000 * 1024);
+
+        //ijkMediaPlayer.setOption(1, "analyzemaxduration", 100L);
+        //ijkMediaPlayer.setOption(1, "probesize", 10240L);
+        //ijkMediaPlayer.setOption(1, "flush_packets", 1L);
+        ijkMediaPlayer.setOption(4, "packet-buffering", 0L);
+        ijkMediaPlayer.setOption(4, "framedrop", 1L);
+        /*ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_CODEC,"skip_loop_filter",48L);
+        ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT,"analyzeduration",1);
+        ijkMediaPlayer.setOption(IjkMediaPlayer.OPT_CATEGORY_FORMAT,"probesize",1024*10);*/
+
+        ijkMediaPlayer.setSpeed(1f);
 
         mMediaPlayer = ijkMediaPlayer;
-        ((IjkMediaPlayer) mMediaPlayer).setSpeed(1f);
         if (listener != null) {
             mMediaPlayer.setOnPreparedListener(listener);
             mMediaPlayer.setOnInfoListener(listener);
@@ -252,12 +269,6 @@ public class VideoPlayerIJK extends FrameLayout {
     public void seekTo(long l) {
         if (mMediaPlayer != null) {
             mMediaPlayer.seekTo(l);
-        }
-    }
-
-    public void setVolumn(float v) {
-        if (mMediaPlayer != null) {
-            mMediaPlayer.setVolume(v,v);
         }
     }
 }
