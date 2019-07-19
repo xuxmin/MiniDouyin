@@ -73,6 +73,9 @@ public class IJKPlayerActivity extends Activity {
         url = getIntent().getStringExtra("url");
         Log.d(TAG, url);
 
+        lottieAnimationView = findViewById(R.id.animation_view);
+        lottieAnimationView.setVisibility(View.GONE);
+
         init();
         initIJKPlayer();
     }
@@ -398,8 +401,8 @@ public class IJKPlayerActivity extends Activity {
 
     private void doubleClick() {
         //        Toast.makeText(this, "double",Toast.LENGTH_SHORT).show();
-        lottieAnimationView = findViewById(R.id.animation_view);
         lottieAnimationView.setVisibility(View.VISIBLE);
+
         AnimatorSet animatorSet = new AnimatorSet();
         ObjectAnimator animator1 = ObjectAnimator.ofFloat(lottieAnimationView, "alpha", 1f, 0f);
         animator1.setDuration(1000);
